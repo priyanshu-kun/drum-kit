@@ -33,9 +33,11 @@
 /*Instructor Logic*/ 
 
 window.addEventListener("keydown",e => {
+//     use data attribute to select audio and buttons
     const sound = document.querySelector(`audio[data-key="${e.keyCode}"`);
     const key = document.querySelector(`.key[data-key="${e.keyCode}"`);
     if(!sound) return;
+//     sound.currentTime is updating previous play to 0 mean play sound rewinding
     sound.currentTime = 0;
     sound.play();
     key.classList.add("playing")
@@ -43,9 +45,11 @@ window.addEventListener("keydown",e => {
 
 const keys = document.querySelectorAll(".key");
 
+// removing transition effect of a button
 function removertransition(e) {
     if(e.propertyName !== "transform") return;
     this.classList.remove("playing")
 }
 
+// I will use transitionend it will fire when transition is end
 keys.forEach(items => items.addEventListener("transitionend",removertransition));
